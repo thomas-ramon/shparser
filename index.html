@@ -1,27 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sillage History to ICS file</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
-    <form action="" method="get" class="form" id="form">
-        <div class="champ">
-            <label for="name">Nom du patient</label>
-            <input type="text" name="name" id="name" />
-            <label for="content">Historique Sillage</label>
-            <textarea name="content" id="content" cols="30" rows="10"></textarea>
-            <label><input type="checkbox" id="" name="options" value="hospit" checked> Inclure Hospitalisations</label><br>
-            <label><input type="checkbox" id="" name="options" value="consult" checked> Inclure Consultations</label><br>
-            <label><input type="checkbox" id="" name="options" value="misc" checked> Inclure Autres</label><br>
-            <button type="submit">Valider</button>
+    <div class="row container">
+    <form action="" method="get" id="form" class="col col-6">
+        <div class="form-group mb-3">
+            <label class="" for="patient-name">Nom du patient</label>
+            <div class="col-6">
+                <input id="patient-name" name="patient-name" placeholder="NOM, PRENOM" type="text" required="required"
+                    class="form-control">
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label class="" for="patient-history">Historique Sillage</label>
+            <div class="">
+                <textarea id="patient-history" name="patient-history" cols="40" rows="10" class="form-control"
+                    aria-describedby="patient-historyHelpBlock" required="required"></textarea>
+                <span id="patient-historyHelpBlock" class="form-text text-muted">Copier l'ensemble de l'historique du
+                    patient sur Sillage et coller ci-dessus</span>
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <div class="" role="group">
+                <button name="submit" type="submit" class="btn btn-primary">Ajouter le patient</button>
+                <button type="button" id="doThis" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Valider les patients
+                  </button>
+            </div>
         </div>
     </form>
-    <form action="" method="get" id="list">
-        <button type="submit">Générer</button>
-    </form>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.5.0/ical.js" integrity="sha512-UxWd2RMDGpYwYuDeU2Fs+nd51gw4ZLQY0D9wWZ3NuanNSk6QQmWCZ6C+rvI0lJ/b/nZtBQ8RVESA9DN9r65dUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="./main.js"></script>
+    <div class="col-md-auto">
+        <ol id="patientList" class="list-group list-group-numbered"></ol>
+    </div>
+    </div>
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form action="" id="options">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Options</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="col-4">Titre du fichier</label>
+                        <div class="col-8">
+                            <div class="input-group">
+                                <input id="ics-file-name" name="ics-file-name" type="text"
+                                    required="required" class="form-control">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">.ics</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4">UFs à inclure</label>
+                        <div class="col-8" id="optionList">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div  class="btn-group btn-group-sm" role="group">
+                            <button type="button" id="checkAll" class="btn btn-link">Tout cocher</button>
+                            <button type="button" id="uncheckAll" class="btn btn-link">Tout décocher</button>    
+                        </div>
+                      </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+              <button type="submit" id="generateICS" class="btn btn-success">Générer</button>
+            </div>
+        </form>
+          </div>
+        </div>
+      </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.5.0/ical.js"
+        integrity="sha512-UxWd2RMDGpYwYuDeU2Fs+nd51gw4ZLQY0D9wWZ3NuanNSk6QQmWCZ6C+rvI0lJ/b/nZtBQ8RVESA9DN9r65dUg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/main.js"></script>
 </body>
+
 </html>
