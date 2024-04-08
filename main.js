@@ -74,7 +74,7 @@ form.addEventListener("submit", (e) => {
 
     let name = document.getElementById("name").value;
     let raw = document.getElementById("content").value;
-    let options = document.querySelectorAll('input[name="options"]:checked')).map(function(input) {
+    let options = Array.from(document.querySelectorAll('input[name="options"]:checked')).map(function(input) {
     return input.value;
  });
 console.log(options);
