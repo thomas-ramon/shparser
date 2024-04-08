@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="get" class="form" id="form">
+        <div class="champ">
+            <label for="name">Nom du patient</label>
+            <input type="text" name="name" id="name" />
+            <label for="content">C/C SILLAGE HISTORIQUE</label>
+            <textarea name="content" id="content" cols="30" rows="10"></textarea>
+        <label><input type="checkbox" name="choix" value="option1" checked> Inclure Hospitalisations</label><br>
+        <label><input type="checkbox" name="choix" value="option2" checked> Inclure Consultations</label><br>
+        <label><input type="checkbox" name="choix" value="option3" checked> Inclure Autres</label><br>
+            <button type="submit">Valider</button>
+        </div>
+    </form>
+    <form action="" method="get" id="list">
+        <button type="submit">Générer</button>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.5.0/ical.js" integrity="sha512-UxWd2RMDGpYwYuDeU2Fs+nd51gw4ZLQY0D9wWZ3NuanNSk6QQmWCZ6C+rvI0lJ/b/nZtBQ8RVESA9DN9r65dUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
